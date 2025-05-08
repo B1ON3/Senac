@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Contato</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+  <div class="container my-5">
+    <h2>Formulário de Contato</h2>
+
+    <form class="needs-validation" novalidate>
+
+      <fieldset class="border p-4 rounded">
+
+        <legend>Informações Pessoais</legend>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" required>
+            <div class="invalid-feedback">Por favor, insira seu nome.</div>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <label for="sobrenome" class="form-label">Sobrenome</label>
+            <input type="text" class="form-control" id="sobrenome" required>
+            <div class="invalid-feedback">Por favor, insira seu sobrenome.</div>
+
+          </div>
+
+        </div>
+
+        <div class="mb-3">
+
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="tel" class="form-control" id="telefone" placeholder="(99) 99999-9999" required>
+          <div class="invalid-feedback">Por favor, insira um telefone válido.</div>
+
+        </div>
+
+        <div class="mb-3">
+
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="email" placeholder="exemplo@dominio.com" required>
+          <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
+
+        </div>
+        <div class="mb-3">
+
+          <label for="mensagem" class="form-label">Mensagem</label>
+          <textarea class="form-control" id="mensagem" rows="4" required></textarea>
+          <div class="invalid-feedback">Por favor, insira sua mensagem.</div>
+
+        </div>
+
+      </fieldset>
+
+      <fieldset class="border p-4 rounded mt-4">
+        <legend>Detalhes do Serviço</legend>
+
+        <div class="mb-3">
+          <label for="tipo-servico" class="form-label">Tipo de Serviço</label>
+          <select class="form-select" id="tipo-servico" name="tipo-servico" required>
+            <option value="">Selecione...</option>
+            <option value="app">Aplicativo (App)</option>
+            <option value="site">Site</option>
+            <option value="banco">Banco de Dados</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+
+
+        <div class="mb-3">
+
+          <label class="form-label">Linguagens Preferidas</label>
+
+          <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" value="HTML" id="langHTML">
+            <label class="form-check-label" for="langHTML">HTML</label>
+
+          </div>
+
+          <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" value="CSS" id="langCSS">
+            <label class="form-check-label" for="langCSS">CSS</label>
+
+          </div>
+
+          <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" value="JavaScript" id="langJS">
+            <label class="form-check-label" for="langJS">JavaScript</label>
+
+          </div>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Tipo de Banco de Dados Recomendado</label>
+
+          <div class="form-check">
+
+            <input class="form-check-input" type="radio" name="bancoDados" id="mysql" value="MySQL" required>
+            <label class="form-check-label" for="mysql">MySQL</label>
+
+          </div>
+
+          <div class="form-check">
+
+            <input class="form-check-input" type="radio" name="bancoDados" id="postgres" value="PostgreSQL" required>
+            <label class="form-check-label" for="postgres">PostgreSQL</label>
+
+          </div>
+
+        </div>
+
+      </fieldset>
+
+      <button class="btn btn-primary mt-3" type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+
+    (() => {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+    
+  </script>
+
+</body>
+</html>
