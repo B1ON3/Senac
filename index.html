@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+  <title>Pokédex Simples</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      background: #ffffff; 
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333; 
+      text-shadow: none;
+    }
+    input, button { 
+      padding: 10px; 
+      margin: 10px; 
+      font-size: 16px; 
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    input {
+      width: 250px;
+      max-width: 80%;
+    }
+    button {
+      background: #ffcc00;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ff9900;
+    }
+    .card { 
+      background: white; 
+      padding: 20px; 
+      border-radius: 15px; 
+      display: inline-block; 
+      margin-top: 20px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+      min-width: 250px;
+      max-width: 90%;
+      animation: aparecer 0.4s ease-in-out;
+    }
+    img { 
+      width: 150px; 
+      max-width: 80%;
+      height: auto;
+      image-rendering: pixelated;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* 🔹 Ajustes para telas menores */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      input, button {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .card {
+        padding: 15px;
+      }
+      img {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🔎 Pokédex</h1>
+  <input type="text" id="pokemonName" placeholder="Digite o nome ou ID do Pokémon">
+  <button onclick="buscarPokemon()">Buscar</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    async function buscarPokemon() {
+      const nome = document.getElementById('pokemonName').value.toLowerCase().trim();
+      const url = `https://pokeapi.co/api/v2/pokemon/${nome}`;
+      const resultadoDiv = document.getElementById('resultado');
+
+      try {
+        const res = await fetch(url);
+
+        if(!res.ok) {
+          resultadoDiv.innerHTML = "<p style='color:red; font-weight:bold;'>❌ Pokémon não encontrado!</p>";
+          return;
+        }
+
+        const data = await res.json();
+        resultadoDiv.innerHTML = `
+          <div class="card">
+            <h2>${data.name.toUpperCase()}</h2>
+            <img src="${data.sprites.front_default}" alt="${data.name}">
+            <p><b>ID:</b> ${data.id}</p>
+            <p><b>Tipo:</b> ${data.types.map(t => t.type.name).join(', ')}</p>
+            <p><b>Altura:</b> ${data.height / 10} m</p>
+            <p><b>Peso:</b> ${data.weight / 10} kg</p>
+          </div>
+        `;
+      } catch (error) {
+        resultadoDiv.innerHTML = "<p style='color:red; font-weight:bold;'>⚠️ Erro ao buscar Pokémon!</p>";
+      }
+    }
+  </script>
+</body>
+</html>
